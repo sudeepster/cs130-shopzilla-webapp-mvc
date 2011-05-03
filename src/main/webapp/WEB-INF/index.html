@@ -3,7 +3,6 @@
     <title>Shopzilla Publisher Webapp</title>
 </head>
 <body>
-    <h1>Shopzilla Publisher Webapp</h1>
     <!--<div>-->
         <!--<form action="categories/show" method="get">-->
             <!--<label>CategoryId:</label>-->
@@ -26,7 +25,7 @@
         <table width="1024px" border="1" align="center">
             <tr>
 	            <td width="20%">
-	                Sample Text 1
+	                Camera Store
 	            </td>
 	            <td width="80%" align="right">
 	                <input type="text" align="right" name="searchkey">
@@ -35,15 +34,35 @@
             </tr>
             <tr>
 	            <td>
-	                Sample Text 2
+	                Taxomony or some kind of a list comes here
 	            </td>
 	            <td>
-	                Sample Text 3
+	            	<table width="819px">
+	            	{{#offers}}
+	            	<tr>
+	            		<td rowspan="4" width="20%"><img src="http://image01.bizrate-images.com/resize?sq=160&uid={{id}}" /></td>
+	            		<td width="80%"><strong>{{title}}</strong></td>
+	            	</tr>
+	            	<tr>
+	            		<td>{{merchant.name}}</td>
+	            	</tr>
+	            	<tr>
+	            		<td>{{description}}</td>
+	            	</tr>
+	            	<tr>
+	            		<td><a href="{{URL}}">Click Here</a></td>
+	            	</tr>
+	            	<tr>
+	            		<td colspan="2"><hr /></td>
+	            	</tr>
+	            	{{/offers}}
+	                </table>
 	            </td>
             </tr>
         </table>
     </form>
 
+<!--
     <p>
 
     <ul>
@@ -67,6 +86,6 @@
     {{#attributes}}
         <p>{{id}}</p>
     {{/attributes}}
-
+-->
 </body>
 </html>

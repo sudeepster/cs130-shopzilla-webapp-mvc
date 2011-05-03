@@ -34,13 +34,13 @@
         <property name="categoryList">
             <list>
                 <bean class="com.shopzilla.api.client.model.Category">
-                    <property name="id" value="10110000" />
-                    <property name="name" value="Women's shoes" />
+                    <property name="id" value="197" />
+                    <property name="name" value="Electronics:Cameras" />
                     <property name="URL" value="" />
                 </bean>
                 <bean class="com.shopzilla.api.client.model.Category">
-                    <property name="id" value="10150000" />
-                    <property name="name" value="Men's shoes" />
+                    <property name="id" value="402" />
+                    <property name="name" value="Digital Cameras" />
                     <property name="URL" value="" />
                 </bean>
             </list>
