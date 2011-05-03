@@ -5,9 +5,32 @@
     <title>Search Page</title>
 </head>
 <body>
-<h1>This is a Search page</h1>
+<h1>Search Page</h1>
 <p>
-    The user searched for <b>{{searchkey}}</b>.
+    Showing results for <b>{{searchkey}}</b>.
 </p>
+
+<table width="819px">
+    {{#offers}}
+    <tr>
+        <td rowspan="4" width="20%"><img src="http://image01.bizrate-images.com/resize?sq=160&uid={{id}}" /></td>
+        <td width="80%"><strong>{{title}}</strong></td>
+    </tr>
+    <tr>
+        <td>{{merchant.name}}</td>
+    </tr>
+    <tr>
+        <td>{{description}}</td>
+    </tr>
+    <tr>
+        <td><a href="{{URL}}">Click Here</a></td>
+    </tr>
+    <tr>
+        <td colspan="2"><hr /></td>
+    </tr>
+    {{/offers}}
+</table>
+
+
 </body>
 </html>

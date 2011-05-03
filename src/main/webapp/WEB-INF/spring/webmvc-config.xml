@@ -28,6 +28,8 @@
     </bean>
 
     <bean id="searchController" class="com.shopzilla.publisher.web.SearchController">
+        <property name="categoryProviderService" ref="categoryProviderService"/>
+        <property name="categorySearchService" ref="categorySearchService"/>
     </bean>
 
     <bean id="categoryProviderService" class="com.shopzilla.publisher.service.InMemoryCategoryProviderServiceImpl">

@@ -45,6 +45,18 @@ public class CategorySearchService {
         return restCatalogAPIClient.performSearch(productSearchRequest);
     }
 
+    public CatalogResponse keywordSearch(Long categoryId, Integer numResults, String keyword) {
+        ProductSearchRequest productSearchRequest = new ProductSearchRequest();
+        productSearchRequest.setApiKey(apiKey);
+        productSearchRequest.setPublisherId(publisherId);
+        productSearchRequest.setCategoryId(categoryId.toString());
+        productSearchRequest.setNumResults(numResults);
+        productSearchRequest.setKeyword(keyword);
+        productSearchRequest.setShowAttributes(Boolean.TRUE);
+
+        return restCatalogAPIClient.performSearch(productSearchRequest);
+    }
+
 
     public void setCredentialFactory(CredentialFactory credentialFactory) {
         apiKey = credentialFactory.getPublisherApiKey();
