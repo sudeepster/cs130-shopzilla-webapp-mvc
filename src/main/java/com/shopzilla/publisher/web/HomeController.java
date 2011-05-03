@@ -92,7 +92,7 @@ public class HomeController {
 
         uiModel.addAttribute("offers", this.offers);
         uiModel.addAttribute("products", this.products);
-
+        uiModel.addAttribute("attributes", this.attributes);
         uiModel.addAttribute("searchkey", key);
         return "index";
     }
@@ -115,34 +115,20 @@ public class HomeController {
         query.deleteCharAt(query.length() - 1);
         String queryStr = query.toString();
 
-/*      Iterator it = requestMap.entrySet().iterator();
-        while(it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String key = (String) entry.getKey();
-            //Object value = entry.getValue();
+        this.offers.clear();
+        this.products.clear();
+        List<Category> categoryList = categoryProviderService.fetchCategories();
+        for (Category category : categoryList) {
+            CatalogResponse response = categorySearchService.attributeSearch(category.getId(), 10, queryStr);
 
-            //value may be String if single value or ArrayList<String> if multiple values
-            //String yo1 = value.getClass().toString();
-            if (entry.getValue() instanceof String) {
-                query.append(key);
-                query.append(":");
-                query.append((String) entry.getValue());
-                query.append(";");
-            }
-            else if (entry.getValue() instanceof ArrayList) {
-                ArrayList<String> paramList = (ArrayList<String>) entry.getValue();
-                Iterator<String> itr = paramList.iterator();
-                while (itr.hasNext()) {
-                    String val = itr.next();
-                    query.append(key);
-                    query.append(":");
-                    query.append(val);
-                    query.append(";");
-                }
-            }
+            this.offers.addAll(response.getOffers());
+            this.products.addAll(response.getProducts());
         }
-        String queryStr = query.toString();
-*/
+
+        uiModel.addAttribute("offers", this.offers);
+        uiModel.addAttribute("products", this.products);
+        uiModel.addAttribute("attributes", this.attributes);
+
         return "index";
     }
 
