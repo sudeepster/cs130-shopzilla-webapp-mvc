@@ -11,6 +11,7 @@
             <!--<input type="submit" />-->
         <!--</form>-->
     <!--</div>-->
+<!--
     <div>
         <ol>
             {{#categories}}
@@ -20,5 +21,52 @@
             {{/categories}}
         </ol>
     </div>
+-->
+    <form action="search" method="get">
+        <table width="1024px" border="1" align="center">
+            <tr>
+	            <td width="20%">
+	                Sample Text 1
+	            </td>
+	            <td width="80%" align="right">
+	                <input type="text" align="right" name="searchkey">
+	                <input type="submit" value="Search">
+	            </td>
+            </tr>
+            <tr>
+	            <td>
+	                Sample Text 2
+	            </td>
+	            <td>
+	                Sample Text 3
+	            </td>
+            </tr>
+        </table>
+    </form>
+
+    <p>
+
+    <ul>
+    {{#offers}}
+        <li>
+            <img src="http://image01.bizrate-images.com/resize?sq=80&uid={{id}}" />
+
+            <p>{{id}}</p>
+            <b>{{title}}</b>
+            <p>{{description}}</p>
+
+        </li>
+    {{/offers}}
+    </ul>
+
+    <hr>
+    {{#products}}
+        <p>{{id}}</p>
+    {{/products}}
+    <hr>
+    {{#attributes}}
+        <p>{{id}}</p>
+    {{/attributes}}
+
 </body>
 </html>
