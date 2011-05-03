@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SearchController {
     @RequestMapping(method = RequestMethod.GET)
-    public String show(@RequestParam("searchBox") String key, Model uiModel) {
-        uiModel.addAttribute("key", key);
+    public String show(@RequestParam("searchkey") String key, Model uiModel) {
+        uiModel.addAttribute("searchkey", key);
         return "search";
     }
 }
