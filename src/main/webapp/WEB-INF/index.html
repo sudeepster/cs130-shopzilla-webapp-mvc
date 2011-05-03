@@ -40,8 +40,9 @@
 	            	<table width="819px">
 	            	{{#offers}}
 	            	<tr>
-	            		<td rowspan="4" width="20%"><img src="http://image01.bizrate-images.com/resize?sq=160&uid={{id}}" /></td>
-	            		<td width="80%"><strong>{{title}}</strong></td>
+	            		<td rowspan="3" width="20%" align="center"><img src="http://image01.bizrate-images.com/resize?sq=140&uid={{id}}" /></td>
+	            		<td width="65%"><strong>{{title}}</strong></td>
+                        <td rowspan="3"width="15%" valign="middle" style="font-size:20px;"><a href="{{URL}}">{{price}}</a></td>
 	            	</tr>
 	            	<tr>
 	            		<td>{{merchant.name}}</td>
@@ -49,11 +50,11 @@
 	            	<tr>
 	            		<td>{{description}}</td>
 	            	</tr>
-	            	<tr>
+	            	<!--<tr>
 	            		<td><a href="{{URL}}">Click Here</a></td>
-	            	</tr>
+	            	</tr>-->
 	            	<tr>
-	            		<td colspan="2"><hr /></td>
+	            		<td colspan="3"><hr /></td>
 	            	</tr>
 	            	{{/offers}}
 	                </table>

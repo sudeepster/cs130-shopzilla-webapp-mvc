@@ -32,6 +32,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author alook
@@ -54,8 +55,10 @@ public class HomeController {
 //        return "index";
 //    }
 
-    @RequestMapping(value = "*", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String displayHomepage(Model uiModel) {
+        this.offers.clear();
+        this.products.clear();
         List<Category> categoryList = categoryProviderService.fetchCategories();
         for (Category category : categoryList) {
             CatalogResponse response = categorySearchService.categorySearch(category.getId(), 10);
@@ -68,6 +71,27 @@ public class HomeController {
 
         return "index";
     }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public String show(@RequestParam("searchkey") String key, Model uiModel) {
+        this.offers.clear();
+        this.products.clear();
+        List<Category> categoryList = categoryProviderService.fetchCategories();
+        for (Category category : categoryList) {
+            CatalogResponse response = categorySearchService.keywordSearch(category.getId(), 10, key);
+
+            this.offers.addAll(response.getOffers());
+            this.products.addAll(response.getProducts());
+        }
+
+        uiModel.addAttribute("offers", this.offers);
+        uiModel.addAttribute("products", this.products);
+
+        uiModel.addAttribute("searchkey", key);
+        return "index";
+    }
+
+
     @Required
     public void setCategoryProviderService(CategoryProviderService categoryProviderService) {
         this.categoryProviderService = categoryProviderService;

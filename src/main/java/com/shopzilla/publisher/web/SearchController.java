@@ -24,7 +24,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 
-@RequestMapping("/search")
+@RequestMapping("/xyzsearch")
 @Controller
 public class SearchController {
     private CategoryProviderService categoryProviderService;
