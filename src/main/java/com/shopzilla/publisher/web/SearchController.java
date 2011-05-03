@@ -29,13 +29,16 @@ import java.util.List;
 public class SearchController {
     private CategoryProviderService categoryProviderService;
     private CategorySearchService categorySearchService;
-    private List<Offer> offers = new ArrayList<Offer>();
-    private List<Product> products = new ArrayList<Product>();
+    private List<Offer> offers;
+    private List<Product> products;
 
 
     @RequestMapping(method = RequestMethod.GET)
     public String show(@RequestParam("searchkey") String key, Model uiModel) {
         List<Category> categoryList = categoryProviderService.fetchCategories();
+        this.offers = new ArrayList<Offer>();
+        this.products = new ArrayList<Product>();
+
         for (Category category : categoryList) {
             CatalogResponse response = categorySearchService.keywordSearch(category.getId(), 10, key);
 
