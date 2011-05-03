@@ -15,14 +15,11 @@
  */
 package com.shopzilla.publisher.web;
 
-import com.shopzilla.api.client.model.CatalogResponse;
-import com.shopzilla.api.client.model.Category;
-import com.shopzilla.api.client.model.Offer;
-import com.shopzilla.api.client.model.Product;
+import com.shopzilla.api.client.model.*;
 import com.shopzilla.publisher.service.CategoryProviderService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Reader;
+import java.util.*;
 
 import com.shopzilla.publisher.service.CategorySearchService;
 import org.apache.commons.logging.Log;
@@ -30,9 +27,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author alook
@@ -46,6 +47,8 @@ public class HomeController {
     private CategoryProviderService categoryProviderService;
     private List<Offer> offers = new ArrayList<Offer>();
     private List<Product> products = new ArrayList<Product>();
+    private List<Attribute> attributes = new ArrayList<Attribute>();
+
     private CategorySearchService categorySearchService;
 
 //    @RequestMapping(value = "*", method = RequestMethod.GET)
@@ -59,15 +62,18 @@ public class HomeController {
     public String displayHomepage(Model uiModel) {
         this.offers.clear();
         this.products.clear();
+        this.attributes.clear();
         List<Category> categoryList = categoryProviderService.fetchCategories();
         for (Category category : categoryList) {
             CatalogResponse response = categorySearchService.categorySearch(category.getId(), 10);
 
             this.offers.addAll(response.getOffers());
             this.products.addAll(response.getProducts());
+            this.attributes.addAll(response.getRelatedAttributes());
         }
         uiModel.addAttribute("offers", this.offers);
         uiModel.addAttribute("products", this.products);
+        uiModel.addAttribute("attributes", this.attributes);
 
         return "index";
     }
@@ -88,6 +94,55 @@ public class HomeController {
         uiModel.addAttribute("products", this.products);
 
         uiModel.addAttribute("searchkey", key);
+        return "index";
+    }
+
+    @RequestMapping(value = "filter", method = RequestMethod.GET)
+    public String filter(HttpServletRequest request, Model uiModel) {
+
+        StringBuilder query = new StringBuilder();
+        Enumeration requestEnum = request.getParameterNames();
+        while (requestEnum.hasMoreElements()) {
+            String key = (String) requestEnum.nextElement();
+            for (String str : request.getParameterValues(key)) {
+                query.append(key);
+                query.append(":");
+                query.append(str);
+                query.append(";");
+            }
+
+        }
+        query.deleteCharAt(query.length() - 1);
+        String queryStr = query.toString();
+
+/*      Iterator it = requestMap.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            String key = (String) entry.getKey();
+            //Object value = entry.getValue();
+
+            //value may be String if single value or ArrayList<String> if multiple values
+            //String yo1 = value.getClass().toString();
+            if (entry.getValue() instanceof String) {
+                query.append(key);
+                query.append(":");
+                query.append((String) entry.getValue());
+                query.append(";");
+            }
+            else if (entry.getValue() instanceof ArrayList) {
+                ArrayList<String> paramList = (ArrayList<String>) entry.getValue();
+                Iterator<String> itr = paramList.iterator();
+                while (itr.hasNext()) {
+                    String val = itr.next();
+                    query.append(key);
+                    query.append(":");
+                    query.append(val);
+                    query.append(";");
+                }
+            }
+        }
+        String queryStr = query.toString();
+*/
         return "index";
     }
 

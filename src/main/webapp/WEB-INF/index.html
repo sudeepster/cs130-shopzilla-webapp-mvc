@@ -21,22 +21,46 @@
         </ol>
     </div>
 -->
-    <form action="search" method="get">
+
         <table width="1024px" border="1" align="center">
             <tr>
 	            <td width="20%">
-	                Camera Store
+                        <a href=".">Camera Store</a>
 	            </td>
 	            <td width="80%" align="right">
-	                <input type="text" align="right" name="searchkey">
-	                <input type="submit" value="Search">
+                    <form action="search" method="get">
+	                    <input type="text" align="right" name="searchkey">
+	                    <input type="submit" value="Search">
+                    </form>
 	            </td>
             </tr>
             <tr>
 	            <td>
-	                Taxomony or some kind of a list comes here
+	                <form action="filter" method="get">
+                        <table>
+                        {{#attributes}}
+                        <tr>
+                            <th>
+                                {{label}}
+                            </th>
+                        </tr>
+                        {{#values}}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="{{id}}" value="{{value}}">{{label}}
+                            </td>
+                        </tr>
+                        {{/values}}
+                        {{/attributes}}
+                        <tr>
+                            <td align="center">
+                                <input type="submit" value="Filter">
+                            </td>
+                        </tr>
+                        </table>
+	                </form>
 	            </td>
-	            <td>
+	            <td valign="top">
 	            	<table width="819px">
 	            	{{#offers}}
 	            	<tr>
@@ -61,7 +85,7 @@
 	            </td>
             </tr>
         </table>
-    </form>
+
 
 <!--
     <p>
