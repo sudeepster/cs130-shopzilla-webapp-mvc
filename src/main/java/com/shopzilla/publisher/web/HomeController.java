@@ -15,9 +15,16 @@
  */
 package com.shopzilla.publisher.web;
 
+import com.shopzilla.api.client.model.CatalogResponse;
 import com.shopzilla.api.client.model.Category;
+import com.shopzilla.api.client.model.Offer;
+import com.shopzilla.api.client.model.Product;
 import com.shopzilla.publisher.service.CategoryProviderService;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import com.shopzilla.publisher.service.CategorySearchService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Required;
@@ -36,16 +43,38 @@ public class HomeController {
     private static final Log LOG = LogFactory.getLog(HomeController.class);
 
     private CategoryProviderService categoryProviderService;
+    private List<Offer> offers = new ArrayList<Offer>();
+    private List<Product> products = new ArrayList<Product>();
+    private CategorySearchService categorySearchService;
+
+//    @RequestMapping(value = "*", method = RequestMethod.GET)
+//    public String displayHomepage(Model uiModel) {
+//        List<Category> categoryList = categoryProviderService.fetchCategories();
+//        uiModel.addAttribute("categories", categoryList);
+//        return "index";
+//    }
 
     @RequestMapping(value = "*", method = RequestMethod.GET)
     public String displayHomepage(Model uiModel) {
         List<Category> categoryList = categoryProviderService.fetchCategories();
-        uiModel.addAttribute("categories", categoryList);
+        for (Category category : categoryList) {
+            CatalogResponse response = categorySearchService.categorySearch(category.getId(), 10);
+
+            this.offers.addAll(response.getOffers());
+            this.products.addAll(response.getProducts());
+        }
+        uiModel.addAttribute("offers", this.offers);
+        uiModel.addAttribute("products", this.products);
+
         return "index";
     }
-
     @Required
     public void setCategoryProviderService(CategoryProviderService categoryProviderService) {
         this.categoryProviderService = categoryProviderService;
+    }
+
+    @Required
+    public void setCategorySearchService(CategorySearchService categorySearchService) {
+        this.categorySearchService = categorySearchService;
     }
 }

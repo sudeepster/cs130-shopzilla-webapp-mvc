@@ -24,13 +24,23 @@
 
     <bean id="homeController" class="com.shopzilla.publisher.web.HomeController">
         <property name="categoryProviderService" ref="categoryProviderService"/>
+        <property name="categorySearchService" ref="categorySearchService"/>
     </bean>
+
+    <bean id="searchController" class="com.shopzilla.publisher.web.SearchController">
+    </bean>
+
     <bean id="categoryProviderService" class="com.shopzilla.publisher.service.InMemoryCategoryProviderServiceImpl">
         <property name="categoryList">
             <list>
                 <bean class="com.shopzilla.api.client.model.Category">
                     <property name="id" value="10110000" />
                     <property name="name" value="Women's shoes" />
+                    <property name="URL" value="" />
+                </bean>
+                <bean class="com.shopzilla.api.client.model.Category">
+                    <property name="id" value="10150000" />
+                    <property name="name" value="Men's shoes" />
                     <property name="URL" value="" />
                 </bean>
             </list>
