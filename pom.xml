@@ -9,6 +9,7 @@
     <name>shopzilla-publisher-mvc</name>
     <properties>
         <shopzilla.catalog.api.version>1.0-SNAPSHOT</shopzilla.catalog.api.version>
+        <shopzilla.catalog.perf.version>0.1.0.BUILD-SNAPSHOT</shopzilla.catalog.perf.version>
         <gae.plugin.version>0.7.1</gae.plugin.version>
         <gae.runtime.version>1.3.7</gae.runtime.version>
         <roo.version>1.1.3.RELEASE</roo.version>
@@ -19,6 +20,12 @@
         <sdkDir>/Users/alook/tools/appengine-sdk-1.4.3/</sdkDir>
     </properties>
     <dependencies>
+        <!-- Include perftool -->
+        <dependency>
+            <groupId>com.shopzilla.perf</groupId>
+            <artifactId>cs130-shopzilla-perftool</artifactId>
+            <version>${shopzilla.catalog.perf.version}</version>
+        </dependency>
         <!-- Include Shopzilla API client -->
         <dependency>
             <groupId>com.shopzilla.api</groupId>
