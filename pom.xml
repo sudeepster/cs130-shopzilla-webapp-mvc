@@ -20,6 +20,12 @@
         <sdkDir>/Users/alook/tools/appengine-sdk-1.4.3/</sdkDir>
     </properties>
     <dependencies>
+        <!-- Include perftool -->
+        <dependency>
+            <groupId>com.shopzilla.perf</groupId>
+            <artifactId>cs130-shopzilla-perftool</artifactId>
+            <version>${shopzilla.perftool.version}</version>
+        </dependency>
         <!-- Include Shopzilla API client -->
         <dependency>
             <groupId>com.shopzilla.api</groupId>
