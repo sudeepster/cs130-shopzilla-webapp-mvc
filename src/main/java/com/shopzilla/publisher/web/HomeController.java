@@ -16,6 +16,7 @@
 package com.shopzilla.publisher.web;
 
 import com.shopzilla.api.client.model.*;
+import com.shopzilla.perf.aspect.PerfTimed;
 import com.shopzilla.publisher.service.CategoryProviderService;
 
 import java.io.Reader;
@@ -58,6 +59,7 @@ public class HomeController {
 //        return "index";
 //    }
 
+    @PerfTimed
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String displayHomepage(Model uiModel) {
         this.offers.clear();
@@ -78,6 +80,7 @@ public class HomeController {
         return "index";
     }
 
+    @PerfTimed
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public String show(@RequestParam("searchkey") String key, Model uiModel) {
         this.offers.clear();
@@ -97,6 +100,7 @@ public class HomeController {
         return "index";
     }
 
+    @PerfTimed
     @RequestMapping(value = "filter", method = RequestMethod.GET)
     public String filter(HttpServletRequest request, Model uiModel) {
 
