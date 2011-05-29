@@ -61,8 +61,8 @@ public class HomeController {
 //        return "index";
 //    }
 
-    //@PerfTimed
-    @Loggable(value = LogLevel.TRACE)
+    @PerfTimed
+    //@Loggable(value = LogLevel.TRACE)
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String displayHomepage(Model uiModel) {
         this.offers.clear();
@@ -83,7 +83,7 @@ public class HomeController {
         return "index";
     }
 
-    //@PerfTimed
+    @PerfTimed
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public String show(@RequestParam("searchkey") String key, Model uiModel) {
         this.offers.clear();
@@ -103,7 +103,7 @@ public class HomeController {
         return "index";
     }
 
-    //@PerfTimed
+    @PerfTimed
     @RequestMapping(value = "filter", method = RequestMethod.GET)
     public String filter(HttpServletRequest request, Model uiModel) {
 
