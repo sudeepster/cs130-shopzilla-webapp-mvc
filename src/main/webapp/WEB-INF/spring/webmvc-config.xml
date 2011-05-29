@@ -12,6 +12,10 @@
     <!--<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>-->
     <!--</context:component-scan>-->
 
+    <bean id="perfController" class="com.shopzilla.perf.web.PerfController">
+
+    </bean>
+
     <bean id="categoryController" class="com.shopzilla.publisher.web.CategoryController">
         <property name="categorySearchService" ref="categorySearchService"/>
     </bean>
