@@ -52,11 +52,15 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
+<!--    <context:component-scan base-package="com.shopzilla.perf.database">
+        <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
+        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan> -->
     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
-        <property name="driverClassName" value="${database.driverClassName}"/>
-        <property name="url" value="${database.url}"/>
-        <property name="username" value="${database.username}"/>
-        <property name="password" value="${database.password}"/>
+        <property name="driverClassName" value="${memdatabase.driverClassName}"/>
+        <property name="url" value="${memdatabase.url}"/>
+        <property name="username" value="${memdatabase.username}"/>
+        <property name="password" value="${memdatabase.password}"/>
     </bean>
     <!--<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">-->
         <!--&lt;!&ndash;<property name="entityManagerFactory" ref="entityManagerFactory"/>&ndash;&gt;-->
@@ -80,5 +84,7 @@
             <bean class="org.springframework.web.servlet.view.mustache.MustacheTemplateLoader" />
         </property>
     </bean>
+
+    <import resource="classpath*:META-INF/spring/integration-data.xml" />
 
 </beans>
