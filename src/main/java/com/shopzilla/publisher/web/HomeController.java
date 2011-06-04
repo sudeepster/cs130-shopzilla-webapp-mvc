@@ -62,7 +62,6 @@ public class HomeController {
 //    }
 
     @PerfTimed
-    //@Loggable(value = LogLevel.TRACE)
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String displayHomepage(Model uiModel) {
         this.offers.clear();
